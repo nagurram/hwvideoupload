@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using VideoUploadApi.UIModels;
 
 namespace VideoUploadApi.Controllers
 {
@@ -8,6 +9,7 @@ namespace VideoUploadApi.Controllers
     {
         [HttpPost]
         [Route("UploadVideo")]
+        [RequestFormLimits(ValueLengthLimit = int.MaxValue, MultipartBodyLengthLimit = int.MaxValue)]
         public IActionResult UploadVideo()
         {
             if (!Request.Form.Files.Any())
@@ -32,13 +34,13 @@ namespace VideoUploadApi.Controllers
         [Route("GetFileList")]
         public IActionResult GetFileList()
         {
-            Dictionary<string, long> files = new Dictionary<string, long>();
+            List<Keyvalue> files = new List<Keyvalue>();
             var filesInUploads = Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "Uploads"),"*.mp4");
             foreach (var filePath in filesInUploads)
             {
                 var fileSize = new FileInfo(filePath).Length;
                 var fileSizeInKB = Convert.ToInt64(fileSize/1024); // Convert to KB
-                files.Add(Path.GetFileName(filePath), fileSizeInKB);
+                files.Add(new Keyvalue() { key = Path.GetFileName(filePath), value = Convert.ToString(fileSizeInKB) });
             }
             return Ok(files);
         }
