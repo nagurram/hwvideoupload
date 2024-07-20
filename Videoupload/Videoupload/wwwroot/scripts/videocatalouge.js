@@ -18,34 +18,27 @@
                 contentType: false,
                 success: function (response) {
                     console.log("File uploaded successfully:", response);
+                    getfilelist();
                     $('#pills-Catalouge-tab').click();
                 },
                 error: function (error) {
+                    alert(error);
                     console.error("Error uploading file:", error);
                 }
             });
         }
     });
-
-    $("#btnUpload").click(function () {
-        getfilelist();
-    });
-
-    $(".tablecell").click(function () {
-    })
-
-
 });
 
 function viewVideo(videoname) {
     console.log('in function');
-    console.log('video path: ' + 'https://localhost:7132/api/Files/GetVideoByName?filename=' + videoname)
-    $("#videofileurl source").attr({
-        "src": 'https://localhost:7132/api/Files/GetVideoByName?filename=' + videoname,
-        "autoplay": "autoplay",
-    });
-}
+    console.log('video path: ' + 'https://localhost:7132/api/Files/GetVideoByName?filename=' + videoname);
 
+    var videoElement = $("#videofileurl");
+    var newVideoSrc = 'https://localhost:7132/api/Files/GetVideoByName?filename=' + videoname;
+    videoElement.attr("src", newVideoSrc);
+    videoElement[0].load();
+}
 
 function getfilelist() {
     $.ajax({
@@ -54,7 +47,6 @@ function getfilelist() {
         success: function (response) {
             $('#videoTable tbody').empty();
             response.forEach(function (item) {
-                
                 $('#videoTable tbody').append(`
                     <tr>
                         <td><a class="tablecell" href="javascript:viewVideo('${item.key}');"> ${item.key}</a></td>

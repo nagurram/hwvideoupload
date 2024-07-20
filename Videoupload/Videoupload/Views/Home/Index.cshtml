@@ -14,17 +14,23 @@
         </ul>
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-Catalouge" role="tabpanel" aria-labelledby="pills-Catalouge-tab">
-                <div class="col-10" id="divvideos" >
-                    <video width="320" height="240" autoplay id="videofileurl" controls>
-                        <source src="https://localhost:7132/api/Files/GetVideoByName?filename=cb-coding-challenge-example-demo.mp4" type="video/mp4" >                       
-                        
-                    </video>
+                <div class="col-10" id="divvideos">
+                    <div class="col-12 mx-auto m-3 bg-info text-white">
+                        <span>Select a video from table to start playback</span>
+                    </div>
+                    <div class="video-container">
+
+                        <video autoplay id="videofileurl" controls>
+                            <source src="https://localhost:7132/api/Files/GetVideoByName?filename=cb-coding-challenge-example-demo.mp4" type="video/mp4">
+
+                        </video>
+                    </div>
                     <table id="videoTable" class="table table-bordered m-3">
                         <thead><tr><th>Video FileName</th><th>FileSize</th></tr></thead>
                         <tbody></tbody>
 
 
-  </table>
+                    </table>
                 </div>
             </div>
             <div class="tab-pane fade" id="pills-Upload" role="tabpanel" aria-labelledby="pills-Upload-tab">

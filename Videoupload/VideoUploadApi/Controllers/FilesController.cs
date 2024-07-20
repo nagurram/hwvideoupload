@@ -7,6 +7,14 @@ namespace VideoUploadApi.Controllers
     [ApiController]
     public class FilesController : ControllerBase
     {
+        long maxsize;
+        public FilesController() {
+
+            maxsize = 200000;
+        }
+
+
+
         [HttpPost]
         [Route("UploadVideo")]
         [RequestFormLimits(ValueLengthLimit = int.MaxValue, MultipartBodyLengthLimit = int.MaxValue)]
@@ -15,9 +23,19 @@ namespace VideoUploadApi.Controllers
             if (!Request.Form.Files.Any())
                 return Ok("No files to process"); // No files to process
 
-            // Handle each uploaded file
+            
             foreach (var file in Request.Form.Files)
             {
+                if (file.ContentType != "video/mp4")
+                {
+                    return BadRequest("Only MP4 files are allowed.");
+                }
+                //if any file is largerthan 300MB
+                if (file.Length.ConvertToKB() > maxsize)
+                {
+                    return StatusCode(StatusCodes.Status413RequestEntityTooLarge, "File size exceeds the allowed limit.");
+                }
+
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
                 if (!Directory.Exists(pathToSave))
                     Directory.CreateDirectory(pathToSave);
@@ -39,7 +57,7 @@ namespace VideoUploadApi.Controllers
             foreach (var filePath in filesInUploads)
             {
                 var fileSize = new FileInfo(filePath).Length;
-                var fileSizeInKB = Convert.ToInt64(fileSize/1024); // Convert to KB
+                var fileSizeInKB = fileSize.ConvertToKB();
                 files.Add(new Keyvalue() { key = Path.GetFileName(filePath), value = Convert.ToString(fileSizeInKB) });
             }
             return Ok(files);
