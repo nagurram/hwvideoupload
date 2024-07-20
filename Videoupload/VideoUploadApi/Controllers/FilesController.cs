@@ -33,7 +33,7 @@ namespace VideoUploadApi.Controllers
         public IActionResult GetFileList()
         {
             Dictionary<string, long> files = new Dictionary<string, long>();
-            var filesInUploads = Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "Uploads"));
+            var filesInUploads = Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), "Uploads"),"*.mp4");
             foreach (var filePath in filesInUploads)
             {
                 var fileSize = new FileInfo(filePath).Length;
