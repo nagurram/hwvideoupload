@@ -1,6 +1,6 @@
 @VideoUploadApi_HostAddress = http://localhost:5185
 
-GET {{VideoUploadApi_HostAddress}}/weatherforecast/
+GET {{VideoUploadApi_HostAddress}}/files/
 Accept: application/json
 
 ###
