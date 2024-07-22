@@ -1,0 +1,24 @@
+name: Build Project
+
+on: 
+   workflow_dispatch:
+
+build: 
+ runs-on: ubntu-latest
+ steps:
+   -uses:actions/checkout@v3
+   -name:setup .Net core
+     uses: actions/setup-checkout@v3
+     with: 
+       dotnet-version: 8.0.x
+   -name: install dependencies api
+    run:dotnet restore ./hwvideoupload/Videoupload/VideoUploadApi.csproj
+
+   -name: Build api
+    run:dotnet build ./hwvideoupload/Videoupload/VideoUploadApi.csproj  --configuration Release --no-restore
+
+   -name: install dependencies web
+    run:dotnet restore ./hwvideoupload/Videoupload/Videoupload/Videoupload.csproj
+
+   -name: Build web
+    run:dotnet build ./hwvideoupload/Videoupload/Videoupload/Videoupload.csproj --configuration Release --no-restore
