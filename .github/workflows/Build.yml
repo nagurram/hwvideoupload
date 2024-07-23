@@ -14,13 +14,13 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: install dependencies api
-        run: dotnet restore ./hwvideoupload/Videoupload/VideoUploadApi.csproj
+        run: dotnet restore ./Videoupload/VideoUploadApi.csproj
 
       - name: Build api
-        run: dotnet build ./hwvideoupload/Videoupload/VideoUploadApi.csproj  --configuration Release --no-restore
+        run: dotnet build ./Videoupload/VideoUploadApi.csproj  --configuration Release --no-restore
 
       - name: install dependencies web
-        run: dotnet restore ./hwvideoupload/Videoupload/Videoupload/Videoupload.csproj
+        run: dotnet restore ./Videoupload/Videoupload/Videoupload.csproj
 
       - name: Build web
-        run: dotnet build ./hwvideoupload/Videoupload/Videoupload/Videoupload.csproj --configuration Release --no-restore
+        run: dotnet build ./Videoupload/Videoupload/Videoupload.csproj --configuration Release --no-restore
