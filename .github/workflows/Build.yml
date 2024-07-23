@@ -6,21 +6,22 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - name: setup .Net core
-        uses: actions/setup-checkout@v3
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
 
       - name: install dependencies api
-        run: dotnet restore ./Videoupload/VideoUploadApi.csproj
+        run: dotnet restore ./hwvideoupload/Videoupload/VideoUploadApi.csproj
 
       - name: Build api
-        run: dotnet build ./Videoupload/VideoUploadApi.csproj  --configuration Release --no-restore
+        run: dotnet build ./hwvideoupload/Videoupload/VideoUploadApi.csproj  --configuration Release --no-restore
 
       - name: install dependencies web
-        run: dotnet restore ./Videoupload/Videoupload/Videoupload.csproj
+        run: dotnet restore ./hwvideoupload/Videoupload/Videoupload/Videoupload.csproj
 
       - name: Build web
-        run: dotnet build ./Videoupload/Videoupload/Videoupload.csproj --configuration Release --no-restore
+        run: dotnet build ./hwvideoupload/Videoupload/Videoupload/Videoupload.csproj --configuration Release --no-restore
