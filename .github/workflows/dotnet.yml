@@ -21,6 +21,6 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Restore dependencies
-      run: dotnet restore ./Videoupload/VideoUploadApi.csproj
+      run: dotnet restore /Videoupload/VideoUploadApi.csproj
     - name: Build
-      run: dotnet build ./Videoupload/VideoUploadApi.csproj  --configuration Release --no-restore
+      run: dotnet build /Videoupload/VideoUploadApi.csproj  --configuration Release --no-restore
