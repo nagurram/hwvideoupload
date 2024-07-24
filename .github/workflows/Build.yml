@@ -22,6 +22,12 @@ jobs:
         working-directory: ./Videoupload/VideoUploadApi
         run: dotnet build    --configuration Release --no-restore
 
+      - name: upload api project build files
+        uses: actions/upload-artifacts@v3
+        with:
+          name: VideoUploadApi
+          path: ./Videoupload/VideoUploadApi/bin/Release/net8.0/
+
       - name: install dependencies web
         working-directory: ./Videoupload/Videoupload
         run: dotnet restore
