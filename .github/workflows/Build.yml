@@ -20,7 +20,7 @@ jobs:
 
       - name: Build api
         working-directory: ./Videoupload/VideoUploadApi
-        run: dotnet build    --configuration Release --no-restore
+        run: dotnet build    --configuration Release --no-restore  --self-contained true
 
       - name: upload api project build files
         uses: actions/upload-artifact@v4
@@ -34,4 +34,10 @@ jobs:
 
       - name: Build web
         working-directory: ./Videoupload/Videoupload
-        run: dotnet build  --configuration Release --no-restore
+        run: dotnet build  --configuration Release --no-restore  --self-contained true
+
+      - name: upload web project build files
+        uses: actions/upload-artifact@v4
+        with:
+          name: VideoUploadWeb
+          path: ./Videoupload/Videoupload/bin/Release/net8.0/
