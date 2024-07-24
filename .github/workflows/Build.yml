@@ -24,13 +24,13 @@ jobs:
 
       - name: Publish api
         working-directory: ./Videoupload/VideoUploadApi
-        run: dotnet publish -c Release -o ../dotnet-webapp -r linux-x64 --self-contained true 
+        run: dotnet publish -c Release -o ../VideoUploadApi -r linux-x64 --self-contained true 
 
       - name: upload api project build files
         uses: actions/upload-artifact@v4
         with:
           name: VideoUploadApi
-          path: ./Videoupload/VideoUploadApi/bin/Release/net8.0/
+          path: ./Videoupload/VideoUploadApi/
 
       - name: install dependencies web
         working-directory: ./Videoupload/Videoupload
@@ -40,8 +40,12 @@ jobs:
         working-directory: ./Videoupload/Videoupload
         run: dotnet build  --configuration Release --no-restore 
 
+      - name: Publish api
+        working-directory: ./Videoupload/Videoupload
+        run: dotnet publish -c Release -o ../VideoUploadApp -r linux-x64 --self-contained true 
+
       - name: upload web project build files
         uses: actions/upload-artifact@v4
         with:
           name: VideoUploadWeb
-          path: ./Videoupload/Videoupload/bin/Release/net8.0/
+          path: ./Videoupload/VideoUploadApp/
