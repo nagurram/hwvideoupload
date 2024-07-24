@@ -20,7 +20,7 @@ jobs:
 
       - name: Build api
         working-directory: ./Videoupload/VideoUploadApi
-        run: dotnet build    --configuration Release --no-restore  --self-contained true
+        run: dotnet build    --configuration Release --no-restore  -r linux-x64 --self-contained true
 
       - name: upload api project build files
         uses: actions/upload-artifact@v4
@@ -34,7 +34,7 @@ jobs:
 
       - name: Build web
         working-directory: ./Videoupload/Videoupload
-        run: dotnet build  --configuration Release --no-restore  --self-contained true
+        run: dotnet build  --configuration Release --no-restore  -r linux-x64 --self-contained true
 
       - name: upload web project build files
         uses: actions/upload-artifact@v4
