@@ -15,13 +15,17 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: install dependencies api
+        working-directory: /Videoupload
         run: dotnet restore /Videoupload/VideoUploadApi.csproj
 
       - name: Build api
+        working-directory: /Videoupload
         run: dotnet build /Videoupload/VideoUploadApi.csproj  --configuration Release --no-restore
 
       - name: install dependencies web
+        working-directory: /Videoupload
         run: dotnet restore /Videoupload/Videoupload/Videoupload.csproj
 
       - name: Build web
+        working-directory: /Videoupload
         run: dotnet build /Videoupload/Videoupload/Videoupload.csproj --configuration Release --no-restore
