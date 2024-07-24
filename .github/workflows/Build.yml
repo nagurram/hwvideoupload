@@ -22,6 +22,10 @@ jobs:
         working-directory: ./Videoupload/VideoUploadApi
         run: dotnet build    --configuration Release --no-restore  
 
+      - name: Publish api
+        working-directory: ./Videoupload/VideoUploadApi
+        run: dotnet publish -c Release -o ../dotnet-webapp -r linux-x64 --self-contained true 
+
       - name: upload api project build files
         uses: actions/upload-artifact@v4
         with:
